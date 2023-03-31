@@ -71,7 +71,7 @@ class TradeManager:
         for exchange in self.exchanges.values():
             exchange_lowest_ask = exchange.getLowestAsk_PriceQTY()
             exchange_lowest_ask_after_fee = exchange_lowest_ask[0] * (1 + exchange.fee)
-            print(f"{exchange.name}")
+            #print(f"{exchange.name}")
             if exchange_lowest_ask_after_fee < lowest_ask:
                 lowest_ask = exchange_lowest_ask_after_fee
                 lowest_ask_exchange = exchange

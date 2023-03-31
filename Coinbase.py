@@ -53,15 +53,15 @@ class Coinbase(Exchange):
 
         
 
-testObj = Coinbase()
-orderbook = testObj.getLowestAsk_PriceQTY()
-print(f"Niedrigster Ask-Preis und Menge (exkl. Gebühren): {orderbook}")
-orderbook[0] = orderbook[0] * (1+testObj.fee)
-print(f"Niedrigster Ask-Preis und Menge (inkl. Gebühren): {orderbook}")
-orderbook = testObj.getHighestBid_PriceQTY()
-print(f"Hoechster Bid-Preis und Menge (exkl. Gebühren): {orderbook}")
-orderbook[0] = orderbook[0] * (1+testObj.fee)
-print(f"Hoechster Bid-Preis und Menge (inkl. Gebühren): {orderbook}")
+#testObj = Coinbase()
+#orderbook = testObj.getLowestAsk_PriceQTY()
+#print(f"Niedrigster Ask-Preis und Menge (exkl. Gebühren): {orderbook}")
+#orderbook[0] = orderbook[0] * (1+testObj.fee)
+#print(f"Niedrigster Ask-Preis und Menge (inkl. Gebühren): {orderbook}")
+#orderbook = testObj.getHighestBid_PriceQTY()
+#print(f"Hoechster Bid-Preis und Menge (exkl. Gebühren): {orderbook}")
+#orderbook[0] = orderbook[0] * (1+testObj.fee)
+#print(f"Hoechster Bid-Preis und Menge (inkl. Gebühren): {orderbook}")
 
 # print(testCB.getLowestAsk_PriceQTY())
 # print(testCB.getLowestAsk_Price())
