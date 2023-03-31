@@ -63,22 +63,22 @@ class TradeManager:
         logFile.write(str)
         logFile.close()
 
+    lowest_ask_exchange = None
+
     def get_lowest_ask_price_exchange_after_fee(self):
-        lowest_ask_exchange = None
         lowest_ask = float("inf")
         qty = 0
 
         for exchange in self.exchanges.values():
             exchange_lowest_ask = exchange.getLowestAsk_PriceQTY()
             exchange_lowest_ask_after_fee = exchange_lowest_ask[0] * (1 + exchange.fee)
-            #print(f"{exchange.name}")
+            print(f"{exchange.name} mit {exchange_lowest_ask} und mit Gebühr: {exchange_lowest_ask_after_fee}")
             if exchange_lowest_ask_after_fee < lowest_ask:
                 lowest_ask = exchange_lowest_ask_after_fee
-                lowest_ask_exchange = exchange
+                self.lowest_ask_exchange = exchange
                 qty = exchange_lowest_ask[1]
-                
 
-        return lowest_ask, lowest_ask_exchange, qty
+        return lowest_ask, self.lowest_ask_exchange, qty
 
     def get_highest_bid_price_exchange_after_fee(self):
         highest_bid_exchange = None
@@ -86,13 +86,14 @@ class TradeManager:
         qty = 0
 
         for exchange in self.exchanges.values():
-            exchange_highest_bid = exchange.getHighestBid_PriceQTY()
-            exchange_highest_bid_after_fee = exchange_highest_bid[0] * (1 - exchange.fee)
-            if exchange_highest_bid_after_fee > highest_bid:
-                highest_bid = exchange_highest_bid_after_fee
-                highest_bid_exchange = exchange
-                qty = exchange_highest_bid[1]
-
+            if exchange != self.lowest_ask_exchange:
+                exchange_highest_bid = exchange.getHighestBid_PriceQTY()
+                exchange_highest_bid_after_fee = exchange_highest_bid[0] * (1 - exchange.fee)
+                if exchange_highest_bid_after_fee > highest_bid:
+                    highest_bid = exchange_highest_bid_after_fee
+                    highest_bid_exchange = exchange
+                    qty = exchange_highest_bid[1]
+        self.lowest_ask_exchange = None
         return highest_bid, highest_bid_exchange, qty
 
     # def get_lower_qty(self, ask, bid):
